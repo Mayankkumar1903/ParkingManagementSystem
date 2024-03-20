@@ -1,0 +1,33 @@
+﻿@model  ParkingManagement.Model.LoginModel
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm("Login", "Login", FormMethod.Post))
+{
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link href="@Url.Content("~/Content/Login.css")" rel="stylesheet" type="text/css" />
+    <div class="container">
+        <div class="login-container">
+            <h2> Login </h2>
+            @if (TempData["LoginErrorMessage"] != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @TempData["LoginErrorMessage"]
+                </div>
+            }
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Enter email", required = "required", type = "email" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, new { @class = "control-label" })
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password", required = "required" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+}

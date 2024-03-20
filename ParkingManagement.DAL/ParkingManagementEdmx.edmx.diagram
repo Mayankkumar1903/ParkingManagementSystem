@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="87dca86440a348d88c9c65fbd2505dfc" Name="Diagram1">
+        <EntityTypeShape EntityType="ParkingManagementModel.User" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkingManagementModel.ParkingSpace" Width="1.5" PointX="3" PointY="1.25" />
+        <EntityTypeShape EntityType="ParkingManagementModel.ParkingZone" Width="1.5" PointX="0.75" PointY="1.375" />
+        <EntityTypeShape EntityType="ParkingManagementModel.VehicleParking" Width="1.5" PointX="5.25" PointY="1" />
+        <AssociationConnector Association="ParkingManagementModel.FK__ParkingSp__Parki__7B5B524B" />
+        <AssociationConnector Association="ParkingManagementModel.FK__VehiclePa__Parki__7F2BE32F" />
+        <AssociationConnector Association="ParkingManagementModel.FK__VehiclePa__Parki__7E37BEF6" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

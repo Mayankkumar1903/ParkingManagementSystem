@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<link href="@Url.Content("~/Content/ParkingReport.css")" rel="stylesheet" type="text/css" />
+<title>Parking Zone Report</title>
+<h2>Parking Zone Report</h2>
+
+<form id="parkingForm">
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" required>
+
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" required>
+
+    <button type="button" onclick="generateReport()">Generate Report</button>
+    <button type="button" onclick="generatePDF()">Generate PDF</button>
+</form>
+
+<div id="reportContainer"></div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
+@section scripts {
+    @Scripts.Render("~/Scripts/ParkingReport.js")
+}

@@ -1,0 +1,56 @@
+﻿@model ParkingManagement.Model.ParkingZoneModel
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<link href="@Url.Content("~/Content/Dashboard.css")" rel="stylesheet" type="text/css" />
+
+<header>
+    <h1>Parking Management Dashboard</h1>
+</header>
+
+<section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <form id="filterspace">
+        <label for="filterZone">Filter by Parking Zone:</label>
+        @Html.DropDownListFor(model => model.ParkingZoneTitle, ViewBag.ZoneList as SelectList, new { id = "filterZone", style = "width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; background-color: #fff; color: #333;" })
+        <button type="button" onclick="filterSpaces()" class="actionButton">Apply Filter</button>
+        <button type="button" id="showAll" class="actionButton">Show All</button>
+        <button type="button" id="deleteAll" class="actionButton">Delete All</button>
+    </form>
+
+    <h2>Parking Space Listing</h2>
+    <table id="parkingTable">
+        <thead>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+</section>
+
+@if (ViewBag.IsAuthorize)
+{
+    <section>
+        <h2>Book Parking Space</h2>
+        <form id="bookForm">
+            <label for="registrationNumber">Vehicle Registration Number:</label>
+            <input type="text" id="registrationNumber" name="registrationNumber" required>
+            <button type="button" class="actionButton" id="bookSpace" onclick="bookSpace()">Book Space</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Release Parking Space</h2>
+        <form id="releaseForm">
+            <label for="releaseRegistrationNumber">Vehicle Registration Number:</label>
+            <input type="text" id="releaseRegistrationNumber" name="releaseRegistrationNumber" required>
+            <button type="button" class="actionButton" id="freeSpace" onclick="releaseSpace()">Release Space</button>
+        </form>
+    </section>
+}
+
+@section scripts {
+    @Scripts.Render("~/Scripts/Dashboard.js")
+}

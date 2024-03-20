@@ -1,0 +1,25 @@
+﻿@model ParkingManagement.Model.ParkingModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="@Url.Content("~/Content/AddParking.css")" rel="stylesheet" type="text/css" />
+<title>Initialize Parking Data</title>
+<div class="container-parking">
+    <h2>Initialize Parking Data</h2>
+
+    @using (Html.BeginForm("InitializeParkingData", "AddParking", FormMethod.Post))
+    {
+        <div>
+            <label for="parkingZone">Parking Zone Name:</label>
+            @Html.TextBoxFor(m => m.ParkingZoneTitle, new { id = "parkingZone" })
+        </div>
+
+        <div>
+            <label for="parkingSpaces">Number of Parking Spaces:</label>
+            @Html.TextBoxFor(m => m.NumberOfSpaces, new { id = "parkingSpaces" })
+        </div>
+
+        <button type="submit">Initialize Parking</button>
+    }
+</div>

@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ParkingManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ParkingSpace">
+          <Key>
+            <PropertyRef Name="ParkingSpaceID" />
+          </Key>
+          <Property Name="ParkingSpaceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParkingSpaceTitle" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ParkingZoneID" Type="int" />
+        </EntityType>
+        <EntityType Name="ParkingZone">
+          <Key>
+            <PropertyRef Name="ParkingZoneID" />
+          </Key>
+          <Property Name="ParkingZoneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParkingZoneTitle" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VehicleParking">
+          <Key>
+            <PropertyRef Name="VehicleParkingID" />
+          </Key>
+          <Property Name="VehicleParkingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParkingZoneID" Type="int" />
+          <Property Name="ParkingSpaceID" Type="int" />
+          <Property Name="RegistrationNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="BookingDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ReleaseDateTime" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__ParkingSp__Parki__7B5B524B">
+          <End Role="ParkingZone" Type="Self.ParkingZone" Multiplicity="0..1" />
+          <End Role="ParkingSpace" Type="Self.ParkingSpace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParkingZone">
+              <PropertyRef Name="ParkingZoneID" />
+            </Principal>
+            <Dependent Role="ParkingSpace">
+              <PropertyRef Name="ParkingZoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VehiclePa__Parki__7E37BEF6">
+          <End Role="ParkingZone" Type="Self.ParkingZone" Multiplicity="0..1" />
+          <End Role="VehicleParking" Type="Self.VehicleParking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParkingZone">
+              <PropertyRef Name="ParkingZoneID" />
+            </Principal>
+            <Dependent Role="VehicleParking">
+              <PropertyRef Name="ParkingZoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VehiclePa__Parki__7F2BE32F">
+          <End Role="ParkingSpace" Type="Self.ParkingSpace" Multiplicity="0..1" />
+          <End Role="VehicleParking" Type="Self.VehicleParking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParkingSpace">
+              <PropertyRef Name="ParkingSpaceID" />
+            </Principal>
+            <Dependent Role="VehicleParking">
+              <PropertyRef Name="ParkingSpaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ParkingManagementModelStoreContainer">
+          <EntitySet Name="ParkingSpace" EntityType="Self.ParkingSpace" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParkingZone" EntityType="Self.ParkingZone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleParking" EntityType="Self.VehicleParking" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ParkingSp__Parki__7B5B524B" Association="Self.FK__ParkingSp__Parki__7B5B524B">
+            <End Role="ParkingZone" EntitySet="ParkingZone" />
+            <End Role="ParkingSpace" EntitySet="ParkingSpace" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VehiclePa__Parki__7E37BEF6" Association="Self.FK__VehiclePa__Parki__7E37BEF6">
+            <End Role="ParkingZone" EntitySet="ParkingZone" />
+            <End Role="VehicleParking" EntitySet="VehicleParking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VehiclePa__Parki__7F2BE32F" Association="Self.FK__VehiclePa__Parki__7F2BE32F">
+            <End Role="ParkingSpace" EntitySet="ParkingSpace" />
+            <End Role="VehicleParking" EntitySet="VehicleParking" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ParkingManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ParkingManagementEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="ParkingSpaces" EntityType="ParkingManagementModel.ParkingSpace" />
+          <EntitySet Name="ParkingZones" EntityType="ParkingManagementModel.ParkingZone" />
+          <EntitySet Name="VehicleParkings" EntityType="ParkingManagementModel.VehicleParking" />
+          <AssociationSet Name="FK__ParkingSp__Parki__7B5B524B" Association="ParkingManagementModel.FK__ParkingSp__Parki__7B5B524B">
+            <End Role="ParkingZone" EntitySet="ParkingZones" />
+            <End Role="ParkingSpace" EntitySet="ParkingSpaces" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VehiclePa__Parki__7F2BE32F" Association="ParkingManagementModel.FK__VehiclePa__Parki__7F2BE32F">
+            <End Role="ParkingSpace" EntitySet="ParkingSpaces" />
+            <End Role="VehicleParking" EntitySet="VehicleParkings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VehiclePa__Parki__7E37BEF6" Association="ParkingManagementModel.FK__VehiclePa__Parki__7E37BEF6">
+            <End Role="ParkingZone" EntitySet="ParkingZones" />
+            <End Role="VehicleParking" EntitySet="VehicleParkings" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="ParkingSpace">
+          <Key>
+            <PropertyRef Name="ParkingSpaceID" />
+          </Key>
+          <Property Name="ParkingSpaceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParkingSpaceTitle" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ParkingZoneID" Type="Int32" />
+          <NavigationProperty Name="ParkingZone" Relationship="ParkingManagementModel.FK__ParkingSp__Parki__7B5B524B" FromRole="ParkingSpace" ToRole="ParkingZone" />
+          <NavigationProperty Name="VehicleParkings" Relationship="ParkingManagementModel.FK__VehiclePa__Parki__7F2BE32F" FromRole="ParkingSpace" ToRole="VehicleParking" />
+        </EntityType>
+        <EntityType Name="ParkingZone">
+          <Key>
+            <PropertyRef Name="ParkingZoneID" />
+          </Key>
+          <Property Name="ParkingZoneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParkingZoneTitle" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ParkingSpaces" Relationship="ParkingManagementModel.FK__ParkingSp__Parki__7B5B524B" FromRole="ParkingZone" ToRole="ParkingSpace" />
+          <NavigationProperty Name="VehicleParkings" Relationship="ParkingManagementModel.FK__VehiclePa__Parki__7E37BEF6" FromRole="ParkingZone" ToRole="VehicleParking" />
+        </EntityType>
+        <EntityType Name="VehicleParking">
+          <Key>
+            <PropertyRef Name="VehicleParkingID" />
+          </Key>
+          <Property Name="VehicleParkingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParkingZoneID" Type="Int32" />
+          <Property Name="ParkingSpaceID" Type="Int32" />
+          <Property Name="RegistrationNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BookingDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReleaseDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ParkingSpace" Relationship="ParkingManagementModel.FK__VehiclePa__Parki__7F2BE32F" FromRole="VehicleParking" ToRole="ParkingSpace" />
+          <NavigationProperty Name="ParkingZone" Relationship="ParkingManagementModel.FK__VehiclePa__Parki__7E37BEF6" FromRole="VehicleParking" ToRole="ParkingZone" />
+        </EntityType>
+        <Association Name="FK__ParkingSp__Parki__7B5B524B">
+          <End Type="ParkingManagementModel.ParkingZone" Role="ParkingZone" Multiplicity="0..1" />
+          <End Type="ParkingManagementModel.ParkingSpace" Role="ParkingSpace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParkingZone">
+              <PropertyRef Name="ParkingZoneID" />
+            </Principal>
+            <Dependent Role="ParkingSpace">
+              <PropertyRef Name="ParkingZoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VehiclePa__Parki__7F2BE32F">
+          <End Type="ParkingManagementModel.ParkingSpace" Role="ParkingSpace" Multiplicity="0..1" />
+          <End Type="ParkingManagementModel.VehicleParking" Role="VehicleParking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParkingSpace">
+              <PropertyRef Name="ParkingSpaceID" />
+            </Principal>
+            <Dependent Role="VehicleParking">
+              <PropertyRef Name="ParkingSpaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VehiclePa__Parki__7E37BEF6">
+          <End Type="ParkingManagementModel.ParkingZone" Role="ParkingZone" Multiplicity="0..1" />
+          <End Type="ParkingManagementModel.VehicleParking" Role="VehicleParking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParkingZone">
+              <PropertyRef Name="ParkingZoneID" />
+            </Principal>
+            <Dependent Role="VehicleParking">
+              <PropertyRef Name="ParkingZoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ParkingManagementModelStoreContainer" CdmEntityContainer="ParkingManagementEntities1">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ParkingManagementModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParkingSpaces">
+            <EntityTypeMapping TypeName="ParkingManagementModel.ParkingSpace">
+              <MappingFragment StoreEntitySet="ParkingSpace">
+                <ScalarProperty Name="ParkingZoneID" ColumnName="ParkingZoneID" />
+                <ScalarProperty Name="ParkingSpaceTitle" ColumnName="ParkingSpaceTitle" />
+                <ScalarProperty Name="ParkingSpaceID" ColumnName="ParkingSpaceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParkingZones">
+            <EntityTypeMapping TypeName="ParkingManagementModel.ParkingZone">
+              <MappingFragment StoreEntitySet="ParkingZone">
+                <ScalarProperty Name="ParkingZoneTitle" ColumnName="ParkingZoneTitle" />
+                <ScalarProperty Name="ParkingZoneID" ColumnName="ParkingZoneID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleParkings">
+            <EntityTypeMapping TypeName="ParkingManagementModel.VehicleParking">
+              <MappingFragment StoreEntitySet="VehicleParking">
+                <ScalarProperty Name="ReleaseDateTime" ColumnName="ReleaseDateTime" />
+                <ScalarProperty Name="BookingDateTime" ColumnName="BookingDateTime" />
+                <ScalarProperty Name="RegistrationNumber" ColumnName="RegistrationNumber" />
+                <ScalarProperty Name="ParkingSpaceID" ColumnName="ParkingSpaceID" />
+                <ScalarProperty Name="ParkingZoneID" ColumnName="ParkingZoneID" />
+                <ScalarProperty Name="VehicleParkingID" ColumnName="VehicleParkingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
